@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumank Bike Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#bikes">Our Bikes</a>
+        <a href="#contact">Contact</a>
+        <button onclick="toggleDarkMode()">Dark Mode</button>
+    </nav>
+</header>
+
+<section id="home" class="hero">
+    <div class="hero-text">
+        <h1>Ride Fast, Ride Safe 🚀</h1>
+        <p>Explore our latest bikes and models!</p>
+        <button onclick="document.getElementById('bikes').scrollIntoView({behavior: 'smooth'})">Explore Bikes</button>
+    </div>
+</section>
+
+<section id="about">
+    <h1>About Me</h1>
+    <p>Hi, my name is <b>Sumank</b>. This is a simple website created by me to learn HTML and CSS.</p>
+</section>
+
+<section id="bikes">
+    <h1>Our Bikes</h1>
+    <div class="bike-cards">
+        <div class="card">
+            <img src="bike1.jpg" alt="Bike Model 1">
+            <h2>Bike Model 1</h2>
+            <p>Price: ₹1,50,000</p>
+            <button>Buy Now</button>
+        </div>
+        <div class="card">
+            <img src="bike2.jpg" alt="Bike Model 2">
+            <h2>Bike Model 2</h2>
+            <p>Price: ₹1,80,000</p>
+            <button>Buy Now</button>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <h1>Contact</h1>
+    <form onsubmit="showMessage(); return false;">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+    <p id="successMessage">Thank you! Your message has been sent 😊</p>
+</section>
+
+<footer>
+    © 2025 Sumank | Learning Web Development
+</footer>
+
+<script>
+    function showMessage() {
+        const msg = document.getElementById('successMessage');
+        msg.style.display = 'block';
+        document.querySelector('form').reset();
+        setTimeout(() => { msg.style.display = 'none'; }, 3000);
+    }
+
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+    }
+
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('nav a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 70;
+            if (pageYOffset >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
